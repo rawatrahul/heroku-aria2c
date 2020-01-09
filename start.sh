@@ -2,9 +2,10 @@
 mkdir -p downloads
 
 if [[ -n $RCLONE_CONFIG && -n $RCLONE_DESTINATION ]]; then
-	echo -e "[DRIVE]\n$RCLONE_CONFIG" > rclone.conf
-	rclone -v --config="rclone.conf" mount "heroku:$RCLONE_DESTINATION" downloads --vfs-cache-mode writes
-	echo "Rclone drive mounted"
+	echo "Rclone config detected"
+	echo -e "[heroku]\n$RCLONE_CONFIG" > rclone.conf
+	echo "on-download-complete=./on-complete.sh" >> aria2c.conf
+	chmod +x on-complete.sh
 fi
 
 wget https://github.com/P3TERX/aria2.conf/raw/master/dht.dat
