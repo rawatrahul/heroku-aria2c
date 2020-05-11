@@ -23,7 +23,7 @@ echo "$(($(cat numUpload)+1))" > numUpload # Plus 1
 if [[ $2 -eq 1 ]]; then # single file
 	rclone -v --config="rclone.conf" move "$3" "DRIVE:$RCLONE_DESTINATION" 2>&1	
 elif [[ $2 -gt 1 ]]; then # multiple file
-	rclone -v --config="rclone.conf" move "$topPath" "DRIVE:$RCLONE_DESTINATION/${relativePath%%/*}"  --exclude="*.aria2"  --exclude="*.exe"  --exclude="*.nfo"  --exclude="*.txt" 
+	rclone -v --config="rclone.conf" move "$topPath" "DRIVE:$RCLONE_DESTINATION/${relativePath%%/*}"  --exclude="*.aria2"  --exclude="*.torrent"  --exclude="*.exe"  --exclude="*.nfo"  --exclude="*.txt" 
 fi
 
 echo "$(($(cat numUpload)-1))" > numUpload # Minus 1
